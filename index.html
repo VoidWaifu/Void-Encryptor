@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Void Encryptor</title>
     <link rel="icon" type="image/png" href="../icon.png">
     <style>
@@ -25,76 +25,84 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        body {
+        html, body {
             background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             color: var(--light);
             min-height: 100vh;
-            padding: 20px;
+            height: 100%;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+        }
+        
+        body {
+            padding: 15px;
             line-height: 1.6;
         }
         
         .container {
             max-width: 900px;
             margin: 0 auto;
+            height: auto;
         }
         
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--gray);
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
         }
         
         h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
         
         .subtitle {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.8;
         }
         
         .header-actions {
             display: flex;
-            gap: 15px;
+            gap: 12px;
         }
         
         .lang-switcher {
             background: rgba(255, 255, 255, 0.1);
             border: none;
-            border-radius: 20px;
+            border-radius: 18px;
             color: var(--light);
-            padding: 8px 15px;
+            padding: 7px 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
         
         .lang-switcher:hover {
@@ -104,15 +112,16 @@
         .my-site-btn {
             background: linear-gradient(90deg, var(--primary), var(--primary-dark));
             border: none;
-            border-radius: 20px;
+            border-radius: 18px;
             color: white;
-            padding: 8px 15px;
+            padding: 7px 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             text-decoration: none;
+            font-size: 0.9rem;
         }
         
         .my-site-btn:hover {
@@ -122,10 +131,10 @@
         
         .tab-container {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 25px;
         }
         
         .tabs {
@@ -135,12 +144,12 @@
         
         .tab {
             flex: 1;
-            padding: 18px;
+            padding: 16px 10px;
             text-align: center;
             background: transparent;
             border: none;
             color: var(--light);
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
@@ -169,7 +178,7 @@
         
         .tab-content {
             display: none;
-            padding: 30px;
+            padding: 25px 20px;
         }
         
         .tab-content.active {
@@ -183,20 +192,20 @@
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 500;
             color: var(--secondary);
         }
         
         textarea, input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 8px;
             border: 1px solid var(--gray);
             background: rgba(0, 0, 0, 0.3);
             color: var(--light);
@@ -211,14 +220,14 @@
         }
         
         textarea {
-            min-height: 150px;
+            min-height: 140px;
             resize: vertical;
             white-space: pre-wrap;
         }
         
         .password-group {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             align-items: flex-start;
         }
         
@@ -228,22 +237,22 @@
         
         .password-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         
         .btn {
-            padding: 14px 24px;
+            padding: 12px 18px;
             background: linear-gradient(90deg, var(--primary), var(--primary-dark));
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             color: white;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         
         .btn:hover {
@@ -265,8 +274,8 @@
         
         .file-upload-area {
             border: 2px dashed var(--gray);
-            border-radius: 10px;
-            padding: 30px;
+            border-radius: 8px;
+            padding: 25px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -279,18 +288,18 @@
         }
         
         .file-upload-area p {
-            margin-top: 10px;
+            margin-top: 8px;
             opacity: 0.8;
         }
         
         .file-list {
-            margin-top: 15px;
-            max-height: 200px;
+            margin-top: 12px;
+            max-height: 180px;
             overflow-y: auto;
         }
         
         .file-list::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         
         .file-list::-webkit-scrollbar-track {
@@ -307,22 +316,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px;
+            padding: 10px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            margin-bottom: 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
         }
         
         .file-name {
             flex-grow: 1;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.9rem;
         }
         
         .file-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             color: var(--secondary);
         }
         
@@ -330,10 +340,11 @@
             background: rgba(255, 0, 0, 0.3);
             border: none;
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 4px 8px;
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 0.85rem;
         }
         
         .remove-file:hover {
@@ -341,37 +352,37 @@
         }
         
         .result-section {
-            margin-top: 30px;
-            padding: 25px;
+            margin-top: 25px;
+            padding: 20px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+            border-radius: 8px;
             display: none;
             border-left: 4px solid var(--success);
         }
         
         .result-section h3 {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: var(--success);
         }
         
         .action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         
         .decrypted-content {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
+            border-radius: 6px;
             white-space: pre-wrap;
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
         }
         
         .decrypted-content::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         
         .decrypted-content::-webkit-scrollbar-track {
@@ -385,59 +396,59 @@
         }
         
         .file-preview {
-            margin-top: 20px;
+            margin-top: 15px;
         }
         
         .preview-item {
-            margin-bottom: 20px;
-            padding: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
+            border-radius: 6px;
         }
         
         .preview-image {
             max-width: 100%;
-            max-height: 300px;
-            border-radius: 5px;
+            max-height: 250px;
+            border-radius: 4px;
             display: block;
-            margin: 10px 0;
+            margin: 8px 0;
         }
         
         .preview-audio, .preview-video {
             width: 100%;
-            margin-top: 10px;
-            border-radius: 5px;
+            margin-top: 8px;
+            border-radius: 4px;
         }
         
         .download-btn {
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
         .notification-container {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            max-height: calc(100vh - 40px);
+            gap: 8px;
+            max-height: calc(100vh - 30px);
             overflow: hidden;
         }
         
         .notification {
-            padding: 15px 20px;
+            padding: 12px 16px;
             background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
+            border-radius: 8px;
             color: white;
             transform: translateX(150%);
             transition: all 0.4s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             border-left: 4px solid var(--success);
-            max-width: 350px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         .notification.error {
@@ -454,24 +465,24 @@
         }
         
         .security-info {
-            margin-top: 30px;
-            padding: 20px;
+            margin-top: 25px;
+            padding: 16px;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
+            border-radius: 8px;
             border-left: 4px solid var(--secondary);
         }
         
         .security-info h3 {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--secondary);
         }
         
         .progress-container {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin: 20px 0;
+            border-radius: 3px;
+            margin: 15px 0;
             overflow: hidden;
             display: none;
         }
@@ -479,30 +490,30 @@
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 4px;
+            border-radius: 3px;
             width: 0%;
             transition: width 0.4s ease;
         }
         
         .progress-text {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 8px;
             color: var(--secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .selected-file {
-            margin-top: 15px;
-            padding: 12px;
+            margin-top: 12px;
+            padding: 10px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         textarea::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         
         textarea::-webkit-scrollbar-track {
@@ -516,24 +527,55 @@
         }
         
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                height: auto;
+                min-height: 100vh;
+                overflow-y: auto;
+            }
+            
             header {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
+                flex-direction: row;
+                gap: 15px;
+                text-align: left;
+                margin-bottom: 15px;
+                padding-bottom: 12px;
+            }
+            
+            .logo {
+                gap: 10px;
+            }
+            
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
             }
             
             .header-actions {
-                width: 100%;
-                justify-content: center;
+                gap: 8px;
+            }
+            
+            .lang-switcher, .my-site-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
             }
             
             .tab {
-                padding: 15px 10px;
-                font-size: 1rem;
+                padding: 14px 8px;
+                font-size: 0.9rem;
             }
             
             .tab-content {
-                padding: 20px;
+                padding: 20px 15px;
             }
             
             .action-buttons {
@@ -543,10 +585,13 @@
             .btn {
                 width: 100%;
                 justify-content: center;
+                padding: 14px 16px;
+                font-size: 0.9rem;
             }
             
             .password-group {
                 flex-direction: column;
+                gap: 10px;
             }
             
             .password-actions {
@@ -554,14 +599,42 @@
                 justify-content: space-between;
             }
             
+            .password-actions .btn {
+                width: 48%;
+                font-size: 0.85rem;
+                padding: 10px 12px;
+            }
+            
             .notification-container {
-                right: 10px;
-                left: 10px;
-                max-width: calc(100% - 20px);
+                right: 8px;
+                left: 8px;
+                top: 8px;
+                max-width: calc(100% - 16px);
             }
             
             .notification {
                 max-width: 100%;
+                padding: 10px 14px;
+            }
+            
+            .file-upload-area {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-actions {
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            .password-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .password-actions .btn {
+                width: 100%;
             }
         }
     </style>
@@ -571,7 +644,7 @@
         <header>
             <div class="logo">
                 <div class="logo-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M15 8a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-5a3 3 0 0 1 3-3V5a5 5 0 1 1 10 0v3zM7 5v3h6V5a3 3 0 0 0-6 0z"/>
                     </svg>
                 </div>
@@ -582,13 +655,13 @@
             </div>
             <div class="header-actions">
                 <button class="lang-switcher" id="lang-switcher">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM7 14.5v-3h2v3c2.5-.5 4-2.5 4-5H3c0 2.5 1.5 4.5 4 5z"/>
                     </svg>
                     <span id="lang-text">EN</span>
                 </button>
                 <a href="https://voidwaifu.github.io/VoidWaifu/" target="_blank" class="my-site-btn">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                         <path d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
                     </svg>
@@ -600,13 +673,13 @@
         <div class="tab-container">
             <div class="tabs">
                 <button class="tab active" data-tab="encrypt">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M15 8a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-5a3 3 0 0 1 3-3V5a5 5 0 1 1 10 0v3zM7 5v3h6V5a3 3 0 0 0-6 0z"/>
                     </svg>
                     <span id="encrypt-tab-text">Зашифровать</span>
                 </button>
                 <button class="tab" data-tab="decrypt">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M15 8h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h1V5a5 5 0 1 1 10 0v3zM7 5v3h6V5a3 3 0 0 0-6 0z"/>
                     </svg>
                     <span id="decrypt-tab-text">Расшифровать</span>
@@ -624,7 +697,7 @@
                 <div class="form-group">
                     <label id="file-input-label">Добавить файлы (изображения, аудио, видео):</label>
                     <div class="file-upload-area" id="file-upload-area">
-                        <svg width="40" height="40" viewBox="0 0 20 20" fill="currentColor">
+                        <svg width="36" height="36" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                         </svg>
@@ -640,13 +713,13 @@
                         <input type="password" id="password" placeholder="Введите пароль для шифрования">
                         <div class="password-actions">
                             <button class="btn btn-secondary" onclick="generatePassword()" id="generate-password-btn">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM7 14.5v-3h2v3c2.5-.5 4-2.5 4-5H3c0 2.5 1.5 4.5 4 5z"/>
                                 </svg>
                                 <span id="generate-password-text">Сгенерировать</span>
                             </button>
                             <button class="btn btn-secondary" onclick="copyPassword()" id="copy-password-btn">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M4 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h1V2zm2 1V2h6v1H6zM3 5v8h10V5H3z"/>
                                 </svg>
                                 <span id="copy-password-text">Копировать</span>
@@ -666,7 +739,7 @@
                 </div>
                 
                 <button class="btn btn-success" onclick="encryptData()" id="encrypt-button">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M15 8a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-5a3 3 0 0 1 3-3V5a5 5 0 1 1 10 0v3zM7 5v3h6V5a3 3 0 0 0-6 0z"/>
                     </svg>
                     <span id="encrypt-button-text">Зашифровать</span>
@@ -676,14 +749,14 @@
                     <h3 id="encrypt-result-title">Результат шифрования</h3>
                     <div class="action-buttons">
                         <button class="btn" onclick="downloadVoidFile()">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                                 <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                             </svg>
                             <span id="download-void-text">Скачать .void файл</span>
                         </button>
                         <button class="btn btn-secondary" onclick="resetEncryptForm()">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
                             </svg>
@@ -699,7 +772,7 @@
                 <div class="form-group">
                     <label id="void-file-label">Загрузите .void файл:</label>
                     <div class="file-upload-area" id="void-file-upload-area">
-                        <svg width="40" height="40" viewBox="0 0 20 20" fill="currentColor">
+                        <svg width="36" height="36" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                         </svg>
@@ -707,7 +780,7 @@
                         <input type="file" id="void-file" accept=".void" style="display: none;">
                     </div>
                     <div class="selected-file" id="void-file-selected" style="display: none;">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="file-icon">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" class="file-icon">
                             <path d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7.414A2 2 0 0 0 15.414 6L10 0.586A2 2 0 0 0 8.586 0H6zm0 2h2.586L12 6.414V16H6V4z"/>
                         </svg>
                         <span id="void-file-name"></span>
@@ -725,7 +798,7 @@
                 </div>
                 
                 <button class="btn btn-success" onclick="decryptData()" id="decrypt-button">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M15 8h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h1V5a5 5 0 1 1 10 0v3zM7 5v3h6V5a3 3 0 0 0-6 0z"/>
                     </svg>
                     <span id="decrypt-button-text">Расшифровать</span>
@@ -737,7 +810,7 @@
                     <div class="file-preview" id="file-preview"></div>
                     <div class="action-buttons">
                         <button class="btn btn-secondary" onclick="resetDecryptForm()">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
                             </svg>
@@ -958,7 +1031,7 @@
             notification.id = id;
             
             notification.innerHTML = `
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 2a6 6 0 0 0-6 6v3.586l-.707.707A1 1 0 0 0 4 14h12a1 1 0 0 0 .707-1.707L16 11.586V8a6 6 0 0 0-6-6zM10 18a3 3 0 0 1-3-3h6a3 3 0 0 1-3 3z"/>
                 </svg>
                 <span>${message}</span>
@@ -1036,13 +1109,13 @@
                 
                 fileItem.innerHTML = `
                     <div class="file-name">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="file-icon">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" class="file-icon">
                             <path d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7.414A2 2 0 0 0 15.414 6L10 0.586A2 2 0 0 0 8.586 0H6zm0 2h2.586L12 6.414V16H6V4z"/>
                         </svg>
                         <span>${file.name}</span>
                     </div>
                     <button class="remove-file" onclick="removeFile(${uploadedFiles.length - 1})">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                         </svg>
                         ${isEnglish ? texts.en.remove : texts.ru.remove}
@@ -1064,13 +1137,13 @@
                 
                 fileItem.innerHTML = `
                     <div class="file-name">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="file-icon">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" class="file-icon">
                             <path d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7.414A2 2 0 0 0 15.414 6L10 0.586A2 2 0 0 0 8.586 0H6zm0 2h2.586L12 6.414V16H6V4z"/>
                         </svg>
                         <span>${file.name}</span>
                     </div>
                     <button class="remove-file" onclick="removeFile(${i})">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                         </svg>
                         ${isEnglish ? texts.en.remove : texts.ru.remove}
@@ -1356,7 +1429,7 @@
                                 <h4>${fileInfo.name}</h4>
                                 <img class="preview-image" src="${url}" alt="${fileInfo.name}">
                                 <button class="btn download-btn" onclick="downloadDecryptedFile('${fileInfo.name}')">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                                     </svg>
@@ -1371,7 +1444,7 @@
                                     ${isEnglish ? "Your browser does not support the audio element." : "Ваш браузер не поддерживает аудио элемент."}
                                 </audio>
                                 <button class="btn download-btn" onclick="downloadDecryptedFile('${fileInfo.name}')">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                                     </svg>
@@ -1386,7 +1459,7 @@
                                     ${isEnglish ? "Your browser does not support the video element." : "Ваш браузер не поддерживает видео элемент."}
                                 </video>
                                 <button class="btn download-btn" onclick="downloadDecryptedFile('${fileInfo.name}')">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                                     </svg>
@@ -1397,7 +1470,7 @@
                             previewItem.innerHTML = `
                                 <h4>${fileInfo.name}</h4>
                                 <button class="btn download-btn" onclick="downloadDecryptedFile('${fileInfo.name}')">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                                     </svg>
