@@ -16,6 +16,7 @@
             --gray: #3a3a4a;
             --success: #00cc88;
             --error: #ff4d6d;
+            --warning: #ffaa00;
         }
         
         * {
@@ -202,7 +203,7 @@
             color: var(--secondary);
         }
         
-        textarea, input[type="text"], input[type="password"] {
+        textarea, input[type="text"], input[type="password"], input[type="number"] {
             width: 100%;
             padding: 14px;
             border-radius: 8px;
@@ -213,7 +214,7 @@
             transition: all 0.3s ease;
         }
         
-        textarea:focus, input[type="text"]:focus, input[type="password"]:focus {
+        textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.3);
@@ -270,6 +271,10 @@
         
         .btn-success {
             background: linear-gradient(90deg, var(--success), #00aa77);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(90deg, var(--warning), #cc8800);
         }
         
         .file-upload-area {
@@ -455,6 +460,10 @@
             border-left-color: var(--error);
         }
         
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+        
         .notification.show {
             transform: translateX(0);
         }
@@ -510,6 +519,113 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        
+        .password-strength {
+            margin-top: 8px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+        
+        .password-strength.weak .password-strength-bar {
+            background: var(--error);
+            width: 25%;
+        }
+        
+        .password-strength.medium .password-strength-bar {
+            background: var(--warning);
+            width: 50%;
+        }
+        
+        .password-strength.strong .password-strength-bar {
+            background: var(--success);
+            width: 75%;
+        }
+        
+        .password-strength.very-strong .password-strength-bar {
+            background: var(--success);
+            width: 100%;
+        }
+        
+        .password-strength-text {
+            font-size: 0.8rem;
+            margin-top: 4px;
+            text-align: right;
+            opacity: 0.8;
+        }
+        
+        .password-options {
+            display: none;
+            margin-top: 15px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px solid var(--gray);
+        }
+        
+        .password-options.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+        }
+        
+        .option-row label {
+            margin: 0;
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--light);
+        }
+        
+        .option-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+        
+        .option-row input[type="number"] {
+            width: 80px;
+            padding: 8px 12px;
+        }
+        
+        .generate-btn-container {
+            margin-top: 15px;
+            grid-column: 1 / -1;
+        }
+        
+        .generate-btn-container .btn {
+            width: 100%;
+            justify-content: center;
         }
         
         textarea::-webkit-scrollbar {
@@ -620,6 +736,19 @@
             .file-upload-area {
                 padding: 20px;
             }
+            
+            .password-options {
+                padding: 15px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .option-row {
+                padding: 6px 0;
+            }
         }
         
         @media (max-width: 480px) {
@@ -634,6 +763,20 @@
             }
             
             .password-actions .btn {
+                width: 100%;
+            }
+            
+            .password-options {
+                padding: 12px;
+            }
+            
+            .option-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .option-row input[type="number"] {
                 width: 100%;
             }
         }
@@ -695,7 +838,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label id="file-input-label">Добавить файлы (изображения, аудио, ):</label>
+                    <label id="file-input-label">Добавить файлы (изображения, аудио, видео, другое):</label>
                     <div class="file-upload-area" id="file-upload-area">
                         <svg width="36" height="36" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -710,19 +853,64 @@
                 <div class="form-group">
                     <label for="password" id="password-label">Пароль:</label>
                     <div class="password-group">
-                        <input type="password" id="password" placeholder="Введите пароль для шифрования">
+                        <input type="password" id="password" placeholder="Введите пароль для шифрования" oninput="checkPasswordStrength()" autocomplete="new-password">
                         <div class="password-actions">
-                            <button class="btn btn-secondary" onclick="generatePassword()" id="generate-password-btn">
+                            <button class="btn btn-secondary" onclick="showPasswordOptions()" id="create-password-btn">
                                 <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM7 14.5v-3h2v3c2.5-.5 4-2.5 4-5H3c0 2.5 1.5 4.5 4 5z"/>
                                 </svg>
-                                <span id="generate-password-text">Сгенерировать</span>
+                                <span id="create-password-text">Создать пароль</span>
                             </button>
                             <button class="btn btn-secondary" onclick="copyPassword()" id="copy-password-btn">
                                 <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M4 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h1V2zm2 1V2h6v1H6zM3 5v8h10V5H3z"/>
                                 </svg>
                                 <span id="copy-password-text">Копировать</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="password-strength" id="password-strength">
+                        <div class="password-strength-bar"></div>
+                    </div>
+                    <div class="password-strength-text" id="password-strength-text"></div>
+                    
+                    <div class="password-options" id="password-options">
+                        <div class="options-grid">
+                            <div class="option-group">
+                                <div class="option-row">
+                                    <label for="password-length" id="password-length-label">Длина пароля:</label>
+                                    <input type="number" id="password-length" min="12" max="64" value="32">
+                                </div>
+                            </div>
+                            <div class="option-group">
+                                <div class="option-row">
+                                    <input type="checkbox" id="include-uppercase" checked>
+                                    <label for="include-uppercase" id="include-uppercase-label">Заглавные буквы (A-Z)</label>
+                                </div>
+                                <div class="option-row">
+                                    <input type="checkbox" id="include-lowercase" checked>
+                                    <label for="include-lowercase" id="include-lowercase-label">Строчные буквы (a-z)</label>
+                                </div>
+                                <div class="option-row">
+                                    <input type="checkbox" id="include-numbers" checked>
+                                    <label for="include-numbers" id="include-numbers-label">Цифры (0-9)</label>
+                                </div>
+                                <div class="option-row">
+                                    <input type="checkbox" id="include-symbols" checked>
+                                    <label for="include-symbols" id="include-symbols-label">Символы (!@#$%^&* и др.)</label>
+                                </div>
+                                <div class="option-row">
+                                    <input type="checkbox" id="exclude-similar" checked>
+                                    <label for="exclude-similar" id="exclude-similar-label">Исключить похожие символы (0,O,1,l,I)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="generate-btn-container">
+                            <button class="btn btn-warning" onclick="generateSecurePassword()" id="generate-secure-password-btn">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM7 14.5v-3h2v3c2.5-.5 4-2.5 4-5H3c0 2.5 1.5 4.5 4 5z"/>
+                                </svg>
+                                <span id="generate-secure-password-text">Сгенерировать безопасный пароль</span>
                             </button>
                         </div>
                     </div>
@@ -789,7 +977,7 @@
                 
                 <div class="form-group">
                     <label for="decrypt-password" id="decrypt-password-label">Пароль:</label>
-                    <input type="password" id="decrypt-password" placeholder="Введите пароль для расшифровки">
+                    <input type="password" id="decrypt-password" placeholder="Введите пароль для расшифровки" autocomplete="new-password">
                 </div>
                 
                 <div class="progress-container" id="decrypt-progress">
@@ -823,7 +1011,7 @@
         
         <div class="security-info">
             <h3 id="security-title">Информация о безопасности</h3>
-            <p id="security-text">Ваши данные шифруются с использованием AES-256-GCM с ключом, полученным из вашего пароля с помощью PBKDF2. Шифрование происходит полностью в вашем браузере - никакие данные не отправляются на сервер. Даже при доступе к этому исходному коду, без вашего пароля невозможно расшифровать ваши .void файлы.</p>
+            <p id="security-text">Ваши данные шифруются с использованием AES-256-GCM с ключом, полученным из вашего пароля с помощью PBKDF2 (100,000 итераций). Шифрование происходит полностью в вашем браузере - никакие данные не отправляются на сервер. Пароли генерируются с использованием криптографически безопасного генератора случайных чисел (Web Crypto API). Даже при доступе к этому исходному коду, без вашего пароля невозможно расшифровать ваши .void файлы.</p>
         </div>
     </div>
     
@@ -849,7 +1037,7 @@
                 fileUploadText: "Click to select files",
                 voidFileUploadText: "Click to select file",
                 passwordLabel: "Password:",
-                generatePassword: "Generate",
+                createPassword: "Create Password",
                 copyPassword: "Copy",
                 filenameLabel: "File name (without extension):",
                 encryptButton: "Encrypt",
@@ -863,9 +1051,9 @@
                 decryptResultTitle: "Decrypted Content",
                 newDecryption: "New Decryption",
                 securityTitle: "Security Information",
-                securityText: "Your data is encrypted using AES-256-GCM with a key derived from your password using PBKDF2. The encryption happens entirely in your browser - no data is sent to any server. Even with access to this source code, without your password it's impossible to decrypt your .void files.",
+                securityText: "Your data is encrypted using AES-256-GCM with a key derived from your password using PBKDF2 (100,000 iterations). The encryption happens entirely in your browser - no data is sent to any server. Passwords are generated using cryptographically secure random number generator (Web Crypto API). Even with access to this source code, without your password it's impossible to decrypt your .void files.",
                 mySite: "My Site",
-                lang: "EN",
+                lang: "RU",
                 noText: "(no text)",
                 remove: "Remove",
                 passwordCopied: "Password copied to clipboard",
@@ -877,7 +1065,18 @@
                 errorNoFilename: "Enter file name",
                 errorNoFile: "Select .void file for decryption",
                 errorNoDecryptPassword: "Enter decryption password",
-                errorWrongPassword: "Wrong password or corrupted file"
+                errorWrongPassword: "Wrong password or corrupted file",
+                passwordWeak: "Weak",
+                passwordMedium: "Medium",
+                passwordStrong: "Strong",
+                passwordVeryStrong: "Very Strong",
+                passwordLength: "Password length:",
+                includeUppercase: "Uppercase letters (A-Z)",
+                includeLowercase: "Lowercase letters (a-z)",
+                includeNumbers: "Numbers (0-9)",
+                includeSymbols: "Symbols (!@#$%^&* etc.)",
+                excludeSimilar: "Exclude similar characters (0,O,1,l,I)",
+                generateSecurePassword: "Generate Secure Password"
             },
             ru: {
                 subtitle: "Безопасное шифрование для ваших файлов",
@@ -889,7 +1088,7 @@
                 fileUploadText: "Нажмите для выбора файлов",
                 voidFileUploadText: "Нажмите для выбора файла",
                 passwordLabel: "Пароль:",
-                generatePassword: "Сгенерировать",
+                createPassword: "Создать пароль",
                 copyPassword: "Копировать",
                 filenameLabel: "Имя файла (без расширения):",
                 encryptButton: "Зашифровать",
@@ -903,9 +1102,9 @@
                 decryptResultTitle: "Расшифрованный контент",
                 newDecryption: "Новая расшифровка",
                 securityTitle: "Информация о безопасности",
-                securityText: "Ваши данные шифруются с использованием AES-256-GCM с ключом, полученным из вашего пароля с помощью PBKDF2. Шифрование происходит полностью в вашем браузере - никакие данные не отправляются на сервер. Даже при доступе к этому исходному коду, без вашего пароля невозможно расшифровать ваши .void файлы.",
+                securityText: "Ваши данные шифруются с использованием AES-256-GCM с ключом, полученным из вашего пароля с помощью PBKDF2 (100,000 итераций). Шифрование происходит полностью в вашем браузере - никакие данные не отправляются на сервер. Пароли генерируются с использованием криптографически безопасного генератора случайных чисел (Web Crypto API). Даже при доступе к этому исходному коду, без вашего пароля невозможно расшифровать ваши .void файлы.",
                 mySite: "Мой сайт",
-                lang: "RU",
+                lang: "EN",
                 noText: "(текст отсутствует)",
                 remove: "Удалить",
                 passwordCopied: "Пароль скопирован в буфер обмена",
@@ -917,7 +1116,18 @@
                 errorNoFilename: "Введите имя для файла",
                 errorNoFile: "Выберите .void файл для расшифровки",
                 errorNoDecryptPassword: "Введите пароль для расшифровки",
-                errorWrongPassword: "Неверный пароль или поврежденный файл"
+                errorWrongPassword: "Неверный пароль или поврежденный файл",
+                passwordWeak: "Слабый",
+                passwordMedium: "Средний",
+                passwordStrong: "Надежный",
+                passwordVeryStrong: "Очень надежный",
+                passwordLength: "Длина пароля:",
+                includeUppercase: "Заглавные буквы (A-Z)",
+                includeLowercase: "Строчные буквы (a-z)",
+                includeNumbers: "Цифры (0-9)",
+                includeSymbols: "Символы (!@#$%^&* и др.)",
+                excludeSimilar: "Исключить похожие символы (0,O,1,l,I)",
+                generateSecurePassword: "Сгенерировать безопасный пароль"
             }
         };
         
@@ -938,6 +1148,7 @@
             
             document.getElementById('password').addEventListener('input', function() {
                 currentPassword = this.value;
+                checkPasswordStrength();
             });
             
             document.getElementById('file-upload-area').addEventListener('click', function() {
@@ -990,7 +1201,7 @@
             document.getElementById('file-upload-text').textContent = t.fileUploadText;
             document.getElementById('void-file-upload-text').textContent = t.voidFileUploadText;
             document.getElementById('password-label').textContent = t.passwordLabel;
-            document.getElementById('generate-password-text').textContent = t.generatePassword;
+            document.getElementById('create-password-text').textContent = t.createPassword;
             document.getElementById('copy-password-text').textContent = t.copyPassword;
             document.getElementById('filename-label').textContent = t.filenameLabel;
             document.getElementById('encrypt-button-text').textContent = t.encryptButton;
@@ -1008,6 +1219,14 @@
             document.getElementById('my-site-text').textContent = t.mySite;
             document.getElementById('lang-text').textContent = t.lang;
             
+            document.getElementById('password-length-label').textContent = t.passwordLength;
+            document.getElementById('include-uppercase-label').textContent = t.includeUppercase;
+            document.getElementById('include-lowercase-label').textContent = t.includeLowercase;
+            document.getElementById('include-numbers-label').textContent = t.includeNumbers;
+            document.getElementById('include-symbols-label').textContent = t.includeSymbols;
+            document.getElementById('exclude-similar-label').textContent = t.excludeSimilar;
+            document.getElementById('generate-secure-password-text').textContent = t.generateSecurePassword;
+            
             document.getElementById('encrypt-text').placeholder = isEnglish ? 
                 "Enter the text you want to encrypt..." : 
                 "Введите текст, который хотите зашифровать...";
@@ -1020,9 +1239,11 @@
             document.getElementById('decrypt-password').placeholder = isEnglish ? 
                 "Enter decryption password" : 
                 "Введите пароль для расшифровки";
+            
+            checkPasswordStrength();
         }
         
-        function showNotification(message, isError = false) {
+        function showNotification(message, isError = false, isWarning = false) {
             const container = document.getElementById('notification-container');
             const id = 'notification-' + (++notificationCounter);
             
@@ -1039,6 +1260,8 @@
             
             if (isError) {
                 notification.classList.add('error');
+            } else if (isWarning) {
+                notification.classList.add('warning');
             }
             
             container.appendChild(notification);
@@ -1070,18 +1293,117 @@
             }, 4000);
         }
         
-        function generatePassword() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+        function showPasswordOptions() {
+            const options = document.getElementById('password-options');
+            options.classList.toggle('active');
+        }
+        
+        function generateSecurePassword() {
+            const length = parseInt(document.getElementById('password-length').value) || 32;
+            const includeUppercase = document.getElementById('include-uppercase').checked;
+            const includeLowercase = document.getElementById('include-lowercase').checked;
+            const includeNumbers = document.getElementById('include-numbers').checked;
+            const includeSymbols = document.getElementById('include-symbols').checked;
+            const excludeSimilar = document.getElementById('exclude-similar').checked;
+            
+            let charset = '';
+            
+            if (includeUppercase) {
+                charset += excludeSimilar ? 'ABCDEFGHJKLMNPQRSTUVWXYZ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            }
+            
+            if (includeLowercase) {
+                charset += excludeSimilar ? 'abcdefghijkmnopqrstuvwxyz' : 'abcdefghijklmnopqrstuvwxyz';
+            }
+            
+            if (includeNumbers) {
+                charset += excludeSimilar ? '23456789' : '0123456789';
+            }
+            
+            if (includeSymbols) {
+                charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+            }
+            
+            if (charset === '') {
+                charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            }
+            
+            const array = new Uint32Array(length);
+            crypto.getRandomValues(array);
+            
             let password = '';
-            for (let i = 0; i < 32; i++) {
-                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            for (let i = 0; i < length; i++) {
+                password += charset[array[i] % charset.length];
             }
             
             const passwordField = document.getElementById('password');
             passwordField.value = password;
             currentPassword = password;
             
-            showNotification(isEnglish ? "Password generated" : "Пароль сгенерирован");
+            checkPasswordStrength();
+            
+            const strengthBar = document.getElementById('password-strength');
+            if (strengthBar.classList.contains('very-strong')) {
+                showNotification(isEnglish ? "Secure password generated" : "Безопасный пароль сгенерирован");
+            } else {
+                showNotification(isEnglish ? "Password generated" : "Пароль сгенерирован");
+            }
+        }
+        
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthBar = document.getElementById('password-strength');
+            const strengthText = document.getElementById('password-strength-text');
+            
+            if (password.length === 0) {
+                strengthBar.className = 'password-strength';
+                strengthText.textContent = '';
+                return;
+            }
+            
+            let score = 0;
+            
+            if (password.length >= 8) score++;
+            if (password.length >= 12) score++;
+            if (password.length >= 16) score++;
+            if (password.length >= 20) score++;
+            
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^a-zA-Z0-9]/.test(password)) score++;
+            
+            const charVariety = (
+                (/[a-z]/.test(password) ? 26 : 0) +
+                (/[A-Z]/.test(password) ? 26 : 0) +
+                (/[0-9]/.test(password) ? 10 : 0) +
+                (/[^a-zA-Z0-9]/.test(password) ? 32 : 0)
+            );
+            
+            const entropy = Math.log2(Math.pow(charVariety, password.length));
+            
+            if (entropy > 100) score++;
+            if (entropy > 120) score++;
+            if (entropy > 140) score++;
+            
+            let strengthLevel, strengthLabel;
+            
+            if (score <= 4) {
+                strengthLevel = 'weak';
+                strengthLabel = isEnglish ? texts.en.passwordWeak : texts.ru.passwordWeak;
+            } else if (score <= 7) {
+                strengthLevel = 'medium';
+                strengthLabel = isEnglish ? texts.en.passwordMedium : texts.ru.passwordMedium;
+            } else if (score <= 10) {
+                strengthLevel = 'strong';
+                strengthLabel = isEnglish ? texts.en.passwordStrong : texts.ru.passwordStrong;
+            } else {
+                strengthLevel = 'very-strong';
+                strengthLabel = isEnglish ? texts.en.passwordVeryStrong : texts.ru.passwordVeryStrong;
+            }
+            
+            strengthBar.className = 'password-strength ' + strengthLevel;
+            strengthText.textContent = `${strengthLabel} (${Math.round(entropy)} bits entropy)`;
         }
         
         function copyPassword() {
@@ -1160,6 +1482,9 @@
             document.getElementById('file-input').value = '';
             document.getElementById('file-list').innerHTML = '';
             document.getElementById('encrypt-result').style.display = 'none';
+            document.getElementById('password-options').classList.remove('active');
+            document.getElementById('password-strength').className = 'password-strength';
+            document.getElementById('password-strength-text').textContent = '';
             uploadedFiles = [];
             currentPassword = '';
             encryptedData = null;
@@ -1239,6 +1564,17 @@
             if (!filename) {
                 showNotification(isEnglish ? texts.en.errorNoFilename : texts.ru.errorNoFilename, true);
                 return;
+            }
+            
+            const strengthBar = document.getElementById('password-strength');
+            if (strengthBar.classList.contains('weak') || strengthBar.classList.contains('medium')) {
+                const confirmMessage = isEnglish ? 
+                    "Your password is not very strong. Are you sure you want to continue?" :
+                    "Ваш пароль недостаточно надежен. Вы уверены, что хотите продолжить?";
+                
+                if (!confirm(confirmMessage)) {
+                    return;
+                }
             }
             
             currentPassword = password;
